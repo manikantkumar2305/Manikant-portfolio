@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, type ReactNode } from "react";
+import { useLayoutEffect, type ReactNode } from "react";
 import Lenis from "lenis";
 import { gsap, ScrollTrigger, prefersReducedMotion } from "@/lib/gsap";
 import { setLenis, scrollToHash } from "@/lib/lenis";
@@ -9,9 +9,24 @@ import { setLenis, scrollToHash } from "@/lib/lenis";
    Also owns in-page anchor scrolling for the whole site, so every link
    (nav, hero CTAs, footer, and anything we add later) lands below the header. */
 export default function SmoothScroll({ children }: { children: ReactNode }) {
-  useEffect(() => {
+  useLayoutEffect(() => {
     let lenis: Lenis | null = null;
     let raf: ((time: number) => void) | null = null;
+
+    const reset = () => {
+      window.history.scrollRestoration = "manual";
+      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    };
+
+    reset();
+    requestAnimationFrame(reset);
+    setTimeout(reset, 0);
+    setTimeout(reset, 50);
+
+    window.addEventListener("load", reset, { once: true });
+    window.addEventListener("pageshow", reset);
+    window.addEventListener("beforeunload", reset);
+    window.addEventListener("pagehide", reset);
 
     if (!prefersReducedMotion()) {
       lenis = new Lenis({ lerp: 0.1, wheelMultiplier: 1 });
@@ -42,6 +57,9 @@ export default function SmoothScroll({ children }: { children: ReactNode }) {
 
     return () => {
       document.removeEventListener("click", onClick);
+      window.removeEventListener("beforeunload", reset);
+      window.removeEventListener("pagehide", reset);
+      window.removeEventListener("pageshow", reset);
       if (raf) gsap.ticker.remove(raf);
       lenis?.destroy();
       setLenis(null);

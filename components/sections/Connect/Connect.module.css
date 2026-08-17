@@ -116,6 +116,29 @@
   filter: brightness(1.03);
 }
 
+.logoPanel {
+  gap: 22px;
+  flex-direction: column;
+  padding: 34px 24px 28px;
+  background:
+    linear-gradient(145deg, rgba(255, 46, 15, 0.055), rgba(255, 255, 255, 0) 48%),
+    #fff;
+  filter: none;
+}
+.logoImage {
+  width: min(112px, 72%);
+  height: 112px;
+  object-fit: contain;
+}
+.logoName {
+  color: var(--ink-2);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
 .ph {
   color: #cfcfd3;
   font-size: 22px;
@@ -232,9 +255,9 @@
 .footer {
   margin-top: 96px;
   border-top: 1px solid var(--line);
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   align-items: center;
-  justify-content: space-between;
   gap: 18px;
   max-width: var(--max);
   margin-left: auto;
@@ -246,13 +269,26 @@
 .footer b {
   color: var(--ink);
 }
+.location {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.location i {
+  color: var(--accent);
+  font-style: normal;
+}
 .top {
+  justify-self: center;
   font-weight: 800;
   color: var(--ink-2);
   transition: color 0.25s ease;
 }
 .top:hover {
   color: var(--accent);
+}
+.footer > span:last-child {
+  justify-self: end;
 }
 
 /* ---------- responsive ---------- */
@@ -285,9 +321,25 @@
     width: min(30vw, 168px);
     height: 220px;
   }
+  .logoPanel {
+    gap: 16px;
+    padding: 26px 18px 22px;
+  }
+  .logoImage {
+    width: min(88px, 72%);
+    height: 88px;
+  }
+  .logoName {
+    font-size: 11px;
+  }
   .footer {
+    grid-template-columns: 1fr;
     flex-direction: column;
+    justify-items: center;
     text-align: center;
     padding: 24px;
+  }
+  .footer > span:last-child {
+    justify-self: center;
   }
 }

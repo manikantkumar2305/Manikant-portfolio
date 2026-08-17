@@ -42,10 +42,63 @@
 }
 
 /* "Scroll to enter" — fades as soon as the journey starts */
+.resumeActions {
+  position: absolute;
+  left: 112px;
+  bottom: 170px;
+  transform: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  z-index: 1;
+}
+
+.resumeButtons {
+  display: flex;
+  gap: 12px;
+}
+
+.resumeButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 84px;
+  height: 60px;
+  padding: 0 24px;
+  border-radius: 35px;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  color: var(--ink);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.resumeButton:hover,
+.resumeButton:focus-visible {
+  background: #fff;
+  color: var(--ink);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.14);
+}
+
+.resumeButton svg {
+  width: 22px;
+  height: 22px;
+}
+
+.resumeLabel {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
 .hint {
   position: absolute;
   left: 50%;
-  bottom: 86px;
+  bottom: 60px;
   transform: translateX(-50%);
   font-size: 10.5px;
   font-weight: 800;
@@ -65,57 +118,14 @@
   }
 }
 
-/* 01 ━━━━━━ 06 */
-.progress {
-  position: absolute;
-  left: 50%;
-  bottom: 40px;
-  transform: translateX(-50%);
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  font-size: 10.5px;
-  font-weight: 800;
-  letter-spacing: 0.16em;
-  color: var(--ink-3);
-  font-variant-numeric: tabular-nums;
-  pointer-events: none;
-}
-.stageNow {
-  color: var(--ink);
-}
-.progLine {
-  display: block;
-  width: min(220px, 30vw);
-  height: 1.5px;
-  background: #e8e8ea;
-  border-radius: 2px;
-  overflow: hidden;
-}
-.progFill {
-  display: block;
-  height: 100%;
-  width: 100%;
-  background: var(--ink);
-  transform: scaleX(0);
-  transform-origin: left center;
-  will-change: transform;
-}
-
 @media (max-width: 700px) {
   .hint {
     bottom: 76px;
-  }
-  .progress {
-    bottom: 34px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .hint {
     animation: none;
-  }
-  .progress {
-    display: none;
   }
 }

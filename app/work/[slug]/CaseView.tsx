@@ -9,6 +9,7 @@
    fall through to English instead of disappearing. */
 
 import Link from "next/link";
+import { useState } from "react";
 import { PROJECTS } from "@/content/projects";
 import LanguageToggle from "@/components/layout/LanguageToggle";
 import { useLang, L } from "@/lib/i18n";
@@ -16,6 +17,7 @@ import styles from "./case.module.css";
 
 export default function CaseView({ slug }: { slug: string }) {
   const { t, lang } = useLang();
+  const [viewerOpen, setViewerOpen] = useState(false);
 
   const project = PROJECTS.find((p) => p.slug === slug);
   if (!project) return null; /* the server component already called notFound() */
@@ -23,6 +25,9 @@ export default function CaseView({ slug }: { slug: string }) {
   const fr = lang === "fr" ? project.fr : undefined;
   const study = { ...project.study, ...(fr?.study ?? {}) };
   const tags = fr?.tags ?? project.tags;
+
+  const hero = project.hero ?? project.cover;
+  const viewerSrc = hero?.src ?? project.cover?.src;
 
   const idx = PROJECTS.indexOf(project);
   const next = PROJECTS[(idx + 1) % PROJECTS.length];
@@ -97,32 +102,33 @@ export default function CaseView({ slug }: { slug: string }) {
               </div>
             )}
           </div>
-          {project.cover ? (
+          {hero ? (
             <div
               className={styles.cover}
               style={{
-                background: project.cover.bg,
-                color: project.cover.ink === "light" ? "#fff" : "var(--ink)",
+                background: hero.bg,
+                color: hero.ink === "light" ? "#fff" : "var(--ink)",
               }}
             >
-              {project.cover.src && project.cover.variant === "photo" ? (
+              {hero.src && hero.variant === "photo" ? (
                 <img
                   className={styles.coverPhoto}
-                  src={project.cover.src}
+                  src={hero.src}
                   alt={project.coverLabel}
-                  style={
-                    project.cover.focus ? { objectPosition: project.cover.focus } : undefined
-                  }
+                  style={hero.focus ? { objectPosition: hero.focus, cursor: "zoom-in" } : { cursor: "zoom-in" }}
+                  onClick={() => setViewerOpen(true)}
+                  role="button"
+                  aria-label={`View full image for ${project.coverLabel}`}
                 />
-              ) : project.cover.src ? (
+              ) : hero.src ? (
                 <img
                   className={styles.coverBrand}
-                  src={project.cover.src}
+                  src={hero.src}
                   alt={project.coverLabel}
-                  style={{ aspectRatio: project.cover.aspect ?? 1 }}
+                  style={{ aspectRatio: hero.aspect ?? 1 }}
                 />
               ) : (
-                <span className={styles.coverMark}>{project.cover.mark}</span>
+                <span className={styles.coverMark}>{hero.mark}</span>
               )}
             </div>
           ) : (
@@ -131,6 +137,22 @@ export default function CaseView({ slug }: { slug: string }) {
             </div>
           )}
         </header>
+
+        {viewerOpen && viewerSrc ? (
+          <div className={styles.viewerOverlay} onClick={() => setViewerOpen(false)}>
+            <div className={styles.viewerCard} onClick={(event) => event.stopPropagation()}>
+              <button
+                className={styles.viewerClose}
+                type="button"
+                onClick={() => setViewerOpen(false)}
+                aria-label="Close image viewer"
+              >
+                ×
+              </button>
+              <img className={styles.viewerImage} src={viewerSrc} alt={project.coverLabel} />
+            </div>
+          </div>
+        ) : null}
 
         {/* ---- context ---- */}
         <section className={styles.section}>

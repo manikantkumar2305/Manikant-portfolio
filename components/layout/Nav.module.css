@@ -43,10 +43,17 @@
   font-size: 18px;
   letter-spacing: -0.02em;
   margin-right: auto;
-  transition: letter-spacing 0.35s cubic-bezier(0.33, 1, 0.68, 1);
+  transition: letter-spacing 0.35s cubic-bezier(0.33, 1, 0.68, 1), opacity 0.3s ease,
+    transform 0.35s var(--ease-out-expo);
 }
 .logo:hover {
   letter-spacing: 0.01em;
+}
+/* keep the brand visible on the contact section */
+.atContact .logo {
+  opacity: 1;
+  pointer-events: auto;
+  transform: none;
 }
 /* the red period is the brand mark — it does the PillNav logo-spin's job:
    a small, springy acknowledgement on hover */

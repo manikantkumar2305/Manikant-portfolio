@@ -5,41 +5,42 @@
 
 export type Tool = {
   name: string;
-  group: "AI" | "Design" | "Build" | "Creative";
+  group: "Cloud" | "Containers" | "Automation" | "Observability";
   src?: string;
   mono?: string;
   color?: string;
 };
 
 export const TOOLS: Tool[] = [
-  /* — AI — */
-  { name: "Claude", group: "AI", src: "/images/logos/claude.png" },
-  { name: "ChatGPT", group: "AI", src: "/images/logos/chatgpt.png" },
-  { name: "Gemini", group: "AI", mono: "Gm", color: "#2C6BD8" },
-  { name: "Perplexity", group: "AI", mono: "Px", color: "#1F7A86" },
+  /* — Cloud — */
+  { name: "AWS", group: "Cloud", src: "/images/logos/aws.svg" },
+  { name: "EC2", group: "Cloud", src: "/images/logos/aws-ec2.svg" },
+  { name: "S3", group: "Cloud", src: "/images/logos/amazon-s3.svg" },
+  { name: "EKS", group: "Cloud", src: "/images/logos/amazon-eks.svg" },
+  { name: "IAM", group: "Cloud", src: "/images/logos/aws-iam.svg" },
+  { name: "VPC", group: "Cloud", src: "/images/logos/virtual-private-cloud.svg" },
 
-  /* — Design — */
-  { name: "Figma", group: "Design", src: "/images/logos/figma.png" },
-  { name: "Framer", group: "Design", src: "/images/logos/framer.png" },
-  { name: "Spline", group: "Design", src: "/images/logos/spline.png" },
-  { name: "Notion", group: "Design", src: "/images/logos/notion.png" },
+  /* — Containers — */
+  { name: "Docker", group: "Containers", src: "/images/logos/docker.svg" },
+  { name: "Kubernetes", group: "Containers", src: "/images/logos/kubernetes.svg" },
+  { name: "Helm", group: "Containers", src: "/images/logos/helm.svg" },
+  { name: "ECR", group: "Containers", src: "/images/logos/ecr.svg" },
+  { name: "ECS", group: "Containers", src: "/images/logos/amazon-ecs.svg" },
+  { name: "Nginx", group: "Containers", src: "/images/logos/nginx.svg" },
 
-  /* — Build — */
-  { name: "Cursor", group: "Build", mono: "Cu", color: "#141414" },
-  { name: "VS Code", group: "Build", mono: "VS", color: "#0065A9" },
-  { name: "GitHub", group: "Build", mono: "GH", color: "#181717" },
-  { name: "React", group: "Build", mono: "Re", color: "#0E7C99" },
-  { name: "Next.js", group: "Build", mono: "N", color: "#141414" },
-  { name: "Tailwind", group: "Build", mono: "TW", color: "#0891A6" },
-  { name: "HTML", group: "Build", mono: "H5", color: "#D6431C" },
-  { name: "CSS", group: "Build", mono: "C3", color: "#1572B6" },
+  /* — Automation — */
+  { name: "Terraform", group: "Automation", src: "/images/logos/terraform.svg" },
+  { name: "Ansible", group: "Automation", src: "/images/logos/ansible.svg" },
+  { name: "GitHub Actions", group: "Automation", src: "/images/logos/github-action.svg" },
+  { name: "Git", group: "Automation", src: "/images/logos/git-merge.svg" },
+  { name: "Bash", group: "Automation", src: "/images/logos/bash01.svg" },
+  { name: "Python", group: "Automation", src: "/images/logos/python.svg" },
 
-  /* — Creative — */
-  { name: "Photoshop", group: "Creative", mono: "Ps", color: "#1E7FC4" },
-  { name: "Illustrator", group: "Creative", mono: "Ai", color: "#D97A00" },
-  { name: "After Effects", group: "Creative", mono: "Ae", color: "#5C4FE0" },
-  { name: "Midjourney", group: "Creative", src: "/images/logos/midjourney.png" },
-  { name: "CapCut", group: "Creative", src: "/images/logos/capcut.png" },
-  { name: "Runway", group: "Creative", mono: "Rw", color: "#141414" },
-  { name: "ElevenLabs", group: "Creative", mono: "11", color: "#141414" },
+  /* — Observability — */
+  { name: "Prometheus", group: "Observability", src: "/images/logos/prometheus.svg" },
+  { name: "Grafana", group: "Observability", src: "/images/logos/grafana.svg" },
+  { name: "CloudWatch", group: "Observability", src: "/images/logos/aws-cloudwatch.svg" },
+  { name: "Alertmanager", group: "Observability", src: "/images/logos/prometheus.svg" },
+  { name: "Metrics Server", group: "Observability", src: "/images/logos/prometheus.svg" },
+  { name: "Logging", group: "Observability", src: "/images/logos/cloud-logging.svg" },
 ];

@@ -8,7 +8,7 @@
 .wrap {
   max-width: var(--max);
   margin: 0 auto;
-  padding: 120px 44px 130px;
+  padding: 64px 44px 120px;
 }
 
 /* ---------- header ---------- */
@@ -147,7 +147,7 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 28px;
-  margin-top: 84px;
+  margin-top: 64px;
 }
 .metric {
   border-top: 2px solid var(--ink);

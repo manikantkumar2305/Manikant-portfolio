@@ -3,12 +3,12 @@ import Scene from "@/components/layout/Scene";
 import TunnelIntro from "@/components/sections/Intro/TunnelIntro";
 import Hero from "@/components/sections/Hero/Hero";
 import About from "@/components/sections/About/About";
-import Journey from "@/components/sections/Journey/LightJourney";
+import Skills from "@/components/sections/Skills/Skills";
 import DesignStack from "@/components/sections/Stack/DesignStack";
 import Work from "@/components/sections/Work/Work";
-import Experience from "@/components/sections/Experience/Experience";
-import Certifications from "@/components/sections/Certifications/Certifications";
-import Gallery from "@/components/sections/Gallery/Gallery";
+// import Experience from "@/components/sections/Experience/Experience";
+// import Certifications from "@/components/sections/Certifications/Certifications";
+// import Gallery from "@/components/sections/Gallery/Gallery";
 import Connect from "@/components/sections/Connect/Connect";
 
 /*
@@ -38,7 +38,7 @@ export default function Home() {
         {/* keepOnMobile: these three fill one screen at any size, so they stay
             cinematic frames on phones too. The rest release into normal flow —
             their mobile layouts are tall and a fixed frame would clip them. */}
-        <Scene order={1} runway={6} id="intro" keepOnMobile>
+        <Scene order={1} id="intro" keepOnMobile>
           <TunnelIntro />
         </Scene>
 
@@ -50,8 +50,8 @@ export default function Home() {
           <About />
         </Scene>
 
-        <Scene order={4} runway={6} id="journey" keepOnMobile>
-          <Journey />
+        <Scene order={4} id="skills">
+          <Skills />
         </Scene>
 
         <Scene order={5} id="stack">
@@ -62,6 +62,7 @@ export default function Home() {
           <Work />
         </Scene>
 
+        {/* Hidden for now; keep the code here so these sections can return later.
         <Scene order={7} runway={4.4} id="experience">
           <Experience />
         </Scene>
@@ -73,6 +74,7 @@ export default function Home() {
         <Scene order={9} runway={1.6} id="gallery" keepOnMobile>
           <Gallery />
         </Scene>
+        */}
 
         {/* the closing frame rises over the gallery, then flows to the footer */}
         <div className="finalFrame">

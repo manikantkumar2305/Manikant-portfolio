@@ -10,27 +10,30 @@ import { useLang } from "@/lib/i18n";
 const MARQUEE_ROWS = [
   {
     items: [
-      "Product Design",
-      "UX Design",
-      "UI Design",
-      "Design Systems",
-      "User Research",
-      "Interaction Design",
-      "Design Thinking",
+      "AWS",
+      "Cloud Infrastructure",
+      "Kubernetes",
+      "Docker",
+      "Terraform",
+      "CI/CD",
+      "GitHub Actions",
+      "Infrastructure as Code",
     ],
     velocity: 34,
   },
   {
     items: [
-      "Wireframing",
-      "Prototyping",
-      "Visual Design",
-      "Accessibility",
-      "Motion Design",
-      "Figma",
-      "Framer",
-      "AI-Assisted Design",
-      "Frontend Development",
+      "Linux",
+      "Helm",
+      "Monitoring",
+      "Prometheus",
+      "Grafana",
+      "CloudWatch",
+      "Networking",
+      "Automation",
+      "Bash",
+      "Python",
+      "Git",
     ],
     velocity: -28,
     outline: true,
@@ -38,10 +41,10 @@ const MARQUEE_ROWS = [
 ];
 
 const METRICS = [
-  { value: "1st", count: null, key: "about.m1" },
-  { value: "3+", count: 3, suffix: "+", key: "about.m2" },
-  { value: "$70K+", count: 70, prefix: "$", suffix: "K+", key: "about.m3" },
-  { value: "1B+", count: null, key: "about.m4" },
+  { value: "5+", count: 5, suffix: "+", key: "about.m1" },
+  { value: "LEAD", count: null, key: "about.m2" },
+  { value: "100+", count: 100, suffix: "+", key: "about.m3" },
+  { value: "10+", count: 10, suffix: "+", key: "about.m4" },
 ];
 
 export default function About() {

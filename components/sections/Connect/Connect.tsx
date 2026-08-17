@@ -8,22 +8,20 @@
  * cards use the same circle-fill + roll language as the nav.
  */
 
-import { useEffect, useRef, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { gsap, EASE, prefersReducedMotion } from "@/lib/gsap";
 import Button from "@/components/ui/Button";
 import styles from "./Connect.module.css";
 import { useLang } from "@/lib/i18n";
 
-/* Gireesh's own photographs, in the order he supplied them (IMAGE 1–5).
-   `focus` is object-position only: the frames are portrait and two of the
-   photos are landscape, so this keeps him in frame — the images are cropped,
-   never scaled non-uniformly, and their colour is left untouched. */
+/* Cloud and DevOps logo panels. Kept in the same curved arc treatment as the
+   original photo strip, but rendered as contained marks instead of crops. */
 const PANELS = [
-  { src: "/images/connect/moment-1.jpg", focus: "58% 30%", rotate: 26, z: -110, y: -26 },
-  { src: "/images/connect/moment-2.jpg", focus: "center 32%", rotate: 13, z: -40, y: -8 },
-  { src: "/images/connect/moment-3.jpg", focus: "center 34%", rotate: 0, z: 0, y: 0 },
-  { src: "/images/connect/moment-4.jpg", focus: "center 30%", rotate: -13, z: -40, y: -8 },
-  { src: "/images/connect/moment-5.jpg", focus: "46% 32%", rotate: -26, z: -110, y: -26 },
+  { name: "AWS", src: "/images/logos/aws.svg", rotate: 26, z: -110, y: -26 },
+  { name: "Kubernetes", src: "/images/logos/kubernetes.svg", rotate: 13, z: -40, y: -8 },
+  { name: "Terraform", src: "/images/logos/terraform.svg", rotate: 0, z: 0, y: 0 },
+  { name: "Helm", src: "/images/logos/helm.svg", rotate: -13, z: -40, y: -8 },
+  { name: "GitHub Actions", src: "/images/logos/github-action.svg", rotate: -26, z: -110, y: -26 },
 ];
 
 /* Official brand marks, inlined so they inherit size and need no requests.
@@ -45,25 +43,53 @@ const MARKS: Record<string, ReactNode> = {
       <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zm0 10.162a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" />
     </svg>
   ),
+  phone: (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.3-.3.74-.39 1.13-.26 1.24.41 2.57.62 3.96.62.61 0 1.1.49 1.1 1.1v3.49c0 .61-.49 1.1-1.1 1.1C10.43 21.73 2.27 13.57 2.27 3.5c0-.61.49-1.1 1.1-1.1h3.5c.61 0 1.1.49 1.1 1.1 0 1.39.21 2.72.62 3.96.12.39.04.82-.27 1.13l-2.2 2.2z" />
+    </svg>
+  ),
 };
 
 /* URLs exactly as supplied — never guessed (see CONTENT_AUDIT.md) */
 const SOCIALS = [
-  { name: "LinkedIn", mark: "linkedin", href: "https://www.linkedin.com/in/gireesh-kumar-reddy-kolli-" },
-  { name: "GitHub", mark: "github", href: "https://github.com/gireeshkumarreddy" },
-  { name: "Instagram", mark: "instagram", href: "https://www.instagram.com/itsgireeshreddy" },
-  { name: "Email", glyph: "@", href: "mailto:kolligireeshkumarreddy0622@gmail.com" },
+  { name: "LinkedIn", mark: "linkedin", href: "https://www.linkedin.com/in/manikant-kumar-2039a9394/" },
+  { name: "GitHub", mark: "github", href: "https://github.com/manikantkumar2305" },
+  { name: "Instagram", mark: "instagram", href: "https://www.instagram.com/manikant070/" },
+  { name: "Email", glyph: "@", href: "https://mail.google.com/mail/?view=cm&fs=1&to=manikantkumar2305@gmail.com" },
+  { name: "7981517861", mark: "phone", href: "tel:+917981517861" },
 ] as const;
 
 export default function Connect() {
   const root = useRef<HTMLElement>(null);
   const { t } = useLang();
+  const [istTime, setIstTime] = useState("");
+
+  useEffect(() => {
+    const formatTime = () => {
+      setIstTime(
+        new Intl.DateTimeFormat("en-IN", {
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: true,
+          timeZone: "Asia/Kolkata",
+        }).format(new Date())
+      );
+    };
+
+    formatTime();
+    const timer = window.setInterval(formatTime, 1000);
+    return () => window.clearInterval(timer);
+  }, []);
 
   useEffect(() => {
     const el = root.current;
     if (!el || prefersReducedMotion()) return;
 
     const ctx = gsap.context(() => {
+      const arc = el.querySelector<HTMLElement>(`.${styles.arc}`);
+      const panels = gsap.utils.toArray<HTMLElement>(`.${styles.panel}`, el);
+
       /* reveal */
       gsap.from(`.${styles.head} > *`, {
         y: 36,
@@ -74,15 +100,17 @@ export default function Connect() {
         immediateRender: false,
         scrollTrigger: { trigger: el, start: "top 70%" },
       });
-      gsap.from(`.${styles.panel}`, {
-        y: 90,
-        autoAlpha: 0,
-        duration: 1.1,
-        ease: EASE.outExpo,
-        stagger: { each: 0.08, from: "center" },
-        immediateRender: false,
-        scrollTrigger: { trigger: `.${styles.arc}`, start: "top 82%" },
-      });
+      if (arc && panels.length > 0) {
+        gsap.from(panels, {
+          y: 90,
+          autoAlpha: 0,
+          duration: 1.1,
+          ease: EASE.outExpo,
+          stagger: { each: 0.08, from: "center" },
+          immediateRender: false,
+          scrollTrigger: { trigger: arc, start: "top 82%" },
+        });
+      }
       gsap.from(`.${styles.socials} > *`, {
         y: 26,
         autoAlpha: 0,
@@ -94,7 +122,7 @@ export default function Connect() {
       });
 
       /* idle float — each panel bobs on its own rhythm */
-      gsap.utils.toArray<HTMLElement>(`.${styles.panelInner}`).forEach((p, i) => {
+      gsap.utils.toArray<HTMLElement>(`.${styles.panelInner}`, el).forEach((p, i) => {
         gsap.to(p, {
           y: `+=${6 + (i % 3) * 3}`,
           duration: 3 + (i % 3) * 0.7,
@@ -106,7 +134,6 @@ export default function Connect() {
       });
 
       /* cursor: the whole arc leans, each panel adds its own micro-tilt */
-      const panels = gsap.utils.toArray<HTMLElement>(`.${styles.panel}`);
       const setters = panels.map((p, i) => ({
         rx: gsap.quickTo(p, "rotationX", { duration: 0.9, ease: "power3.out" }),
         add: gsap.quickTo(p, "rotationY", { duration: 0.9, ease: "power3.out" }),
@@ -141,7 +168,7 @@ export default function Connect() {
     <section className={styles.connect} id="contact" ref={root}>
       <div className={styles.head}>
         <p className={styles.eyebrow}>
-          <span>08</span> {t("connect.eyebrow")}
+          <span>05</span> {t("connect.eyebrow")}
         </p>
         <h2 className={styles.h2}>
           {t("connect.h2a")}{" "}
@@ -151,15 +178,15 @@ export default function Connect() {
           {t("connect.lede")}
         </p>
         <div className={styles.cta}>
-          <Button href="mailto:kolligireeshkumarreddy0622@gmail.com" variant="primary" arrow>
+          <Button href="https://mail.google.com/mail/?view=cm&fs=1&to=manikantkumar2305@gmail.com" variant="primary" arrow>
             {t("connect.cta")}
           </Button>
         </div>
       </div>
 
-      {/* curved memory arc */}
+      {/* Hidden for now; keep the logo arc here so it can return later.
       <div className={styles.arc} aria-hidden="true">
-        {PANELS.map((p, i) => (
+        {PANELS.map((p) => (
           <div
             className={styles.panel}
             key={p.src}
@@ -169,20 +196,21 @@ export default function Connect() {
               } as React.CSSProperties
             }
           >
-            <div className={`${styles.panelInner} ${styles.hasPhoto}`}>
+            <div className={`${styles.panelInner} ${styles.logoPanel}`}>
               <img
-                className={styles.photo}
+                className={styles.logoImage}
                 src={p.src}
-                alt=""
-                style={{ objectPosition: p.focus }}
+                alt={p.name}
                 loading="lazy"
                 decoding="async"
                 aria-hidden="true"
               />
+              <span className={styles.logoName}>{p.name}</span>
             </div>
           </div>
         ))}
       </div>
+      */}
 
       {/* social cards */}
       <div className={styles.socials}>
@@ -207,13 +235,15 @@ export default function Connect() {
       </div>
 
       <footer className={styles.footer}>
-        <span>
-          {t("connect.credit")} <b>Gireesh</b>
+        <span className={styles.location}>
+          <b>Hyderabad, Telangana</b>
+          <i aria-hidden="true">•</i>
+          <b>{istTime || "--:--:-- --"} (IST)</b>
         </span>
         <a href="#home" className={styles.top}>
           {t("connect.top")}
         </a>
-        <span>© 2026 Gireesh Kumar Reddy Kolli</span>
+        <span>© 2026 Manikant Kumar</span>
       </footer>
     </section>
   );

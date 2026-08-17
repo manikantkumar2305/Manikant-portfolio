@@ -29,21 +29,21 @@ const DESCRIPTION =
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Gireesh Kumar Reddy — Product Designer",
+    default: "Manikant Kumar",
     template: "%s",
   },
   description: DESCRIPTION,
   openGraph: {
-    title: "Gireesh Kumar Reddy — Product Designer",
+    title: "Manikant Kumar",
     description: DESCRIPTION,
     url: SITE_URL,
-    siteName: "Gireesh — Portfolio",
+    siteName: "Manikant — Portfolio",
     type: "website",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Gireesh Kumar Reddy — Product Designer",
+    title: "Manikant Kumar",
     description: DESCRIPTION,
   },
 };
@@ -65,6 +65,26 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${inter.variable} ${instrumentSerif.variable} ${caveat.variable}`}
     >
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(() => {
+              const reset = () => {
+                if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+                window.scrollTo(0, 0);
+              };
+              reset();
+              window.addEventListener('beforeunload', reset);
+              window.addEventListener('pagehide', reset);
+              window.addEventListener('load', reset, { once: true });
+              window.addEventListener('pageshow', reset);
+              requestAnimationFrame(reset);
+              setTimeout(reset, 0);
+              setTimeout(reset, 50);
+            })();`,
+          }}
+        />
+      </head>
       <body>
         <LanguageProvider>
           <SmoothScroll>{children}</SmoothScroll>

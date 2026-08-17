@@ -6,7 +6,7 @@ export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
 export const PERSON = {
-  name: "Gireesh Kumar Reddy Kolli",
+  name: "Manikant Kumar",
   jobTitle: "Product Designer & UX Consultant",
   email: "kolligireeshkumarreddy0622@gmail.com",
   location: "Antibes, France",
