@@ -514,96 +514,76 @@ export const PROJECTS: Project[] = [
 //     },
 //   },
 // 
-//   /* ─────────────── 4 · GAME OF THRONES (GitHub) ─────────────── */
-//   {
-//     slug: "got-cinematic",
-//     title: "Game of Thrones — A Cinematic Experience",
-//     tags: ["Video Scrubbing", "GSAP", "Vite"],
-//     year: "2026",
-//     oneLiner:
-//       "A scroll-scrubbed cinematic tribute that found its audience — 20.5K likes, 3,597 comments and 7,035 shares on one reel.",
-//     contribution:
-//       "Frame-perfect scroll cinema — 20.5K likes and 7K shares on one reel.",
-//     coverLabel: "GAME OF THRONES",
-//     cover: {
-//       bg: "#0B0B0E",
-//       ink: "light",
-//       src: "/images/projects/got-cover.jpg",
-//       variant: "photo",
-//       focus: "center 34%", /* Daenerys and the dragon's eyes */
-//     },
-//     repo: "https://github.com/gireeshkumarreddy/GoT",
-//     fr: {
-//       title: "Game of Thrones — Une expérience cinématique",
-//       oneLiner:
-//         "Un hommage cinématique piloté au scroll qui a trouvé son public — 20,5 K likes, 3 597 commentaires et 7 035 partages sur un reel.",
-//       contribution:
-//         "Un cinéma au scroll image par image — 20,5 K likes et 7 K partages.",
-//       tags: ["Scrubbing vidéo", "GSAP", "Vite"],
-//       study: {
-//         role: "Design & développement — solo",
-//         timeline: "Juillet 2026",
-//         context:
-//           "Un site cinématique piloté au scroll : un prologue qui coule vers un héros en parallaxe, des vidéos de chapitres pour Jon Snow et Daenerys, et une atmosphère de particules, de brume et de dragons.",
-//         problem:
-//           "La vidéo sur le web est passive. L’objectif : un cinéma que l’on conduit — un scrubbing image par image, en avant comme en arrière, au rythme de l’attention du lecteur.",
-//         process: [
-//           {
-//             title: "Un moteur de scrubbing sur canvas",
-//             body: "Les vidéos de chapitres sont décodées vers un canvas, avec des assets optimisés par ffmpeg, pour qu’à toute vitesse de scroll on retombe sur une image nette.",
-//           },
-//           {
-//             title: "Des paliers de performance",
-//             body: "La détection des capacités de l’appareil sert une atmosphère allégée au matériel modeste ; le mouvement réduit reçoit un chemin calme.",
-//           },
-//         ],
-//         decisions: [
-//           {
-//             title: "L’atmosphère en couches, jamais aplatie",
-//             why: "Brume, braises et dragons vivent en couches séparées au-dessus du film — la scène reste nette à toutes les tailles d’écran.",
-//           },
-//         ],
-//         outcomes: [
-//           "20,5 K likes · 3 597 commentaires · 7 035 partages sur le reel de lancement",
-//           "4 étoiles sur GitHub",
-//         ],
-//         reflection:
-//           "Le reel m’a plus appris sur l’accroche et le rythme que n’importe quel tableau de bord — le public est le critique honnête.",
-//         note: "Concept de fan non officiel — sans affiliation avec les ayants droit.",
-//       },
-//     },
-//     study: {
-//       role: "Design & Engineering — solo",
-//       timeline: "July 2026",
-//       context:
-//         "A scroll-driven cinematic website: a prologue flowing into a parallax hero, chapter videos for Jon Snow and Daenerys, and an atmosphere of particles, fog and dragons.",
-//       problem:
-//         "Video on the web is passive. The goal: cinema you drive — frame-perfect scrubbing forward and backward, at the speed of the reader's own attention.",
-//       process: [
-//         {
-//           title: "A canvas scrubbing engine",
-//           body: "Chapter videos decode to canvas with ffmpeg-optimised assets, so any scroll speed lands on a clean frame.",
-//         },
-//         {
-//           title: "Performance tiers",
-//           body: "Device-capability detection serves lighter atmosphere to weaker hardware; reduced-motion gets a calm path.",
-//         },
-//       ],
-//       decisions: [
-//         {
-//           title: "Atmosphere layered, never baked in",
-//           why: "Fog, embers and dragons live as separate layers above the film — the scene stays sharp at every viewport.",
-//         },
-//       ],
-//       outcomes: [
-//         "20.5K likes · 3,597 comments · 7,035 shares on the launch reel",
-//         "4 stars on GitHub",
-//       ],
-//       reflection:
-//         "The reel taught me more about hooks and pacing than any dashboard — an audience is the honest reviewer.",
-//       note: "Unofficial fan-made concept — not affiliated with the rights-holders.",
-//     },
-//   },
+  /* ─────────────── 4 · TERRAFORM AWS 3-TIER INFRASTRUCTURE ─────────────── */
+  {
+    slug: "terraform-aws-3tier-infrastructure",
+    title: "AWS Infrastructure\n3-Tier Architecture with Terraform",
+    tags: ["Terraform", "AWS"],
+    year: "2026",
+    oneLiner:
+      "A production-style 3-tier AWS architecture provisioned entirely through Terraform — one module set, three isolated environments, no duplicated code.",
+    contribution:
+      "Cloud & DevOps Engineer",
+    coverLabel: "TERRAFORM AWS",
+    cover: {
+      bg: "#FFFFFF",
+      ink: "dark",
+      src: "/images/projects/terraform.png",
+      variant: "photo",
+      focus: "center",
+    },
+    hero: {
+      bg: "#0B0B0E",
+      ink: "light",
+      src: "/images/projects/terraform-aws-3tier-infrastructure.png",
+      variant: "photo",
+      focus: "center",
+    },
+    repo: "https://github.com/manikantkumar2305/terraform-aws-3tier-infrastructure",
+    study: {
+      role: "Cloud & DevOps Engineer",
+      timeline: "Sep 2026",
+      context:
+        "A 3-tier AWS architecture — load balancer, application compute, and a managed database — built with reusable Terraform modules and separate DEV, STAGE, and PROD environments.",
+      problem:
+        "Standing up a VPC once is easy. Keeping DEV, STAGE, and PROD on the same architecture without copy-pasted Terraform, while each stays isolated, is the actual problem.",
+      process: [
+        {
+          title: "01 — Tier before module",
+          body: "Defined the public, application, and database subnets and their trust boundaries first, before writing any resource.",
+        },
+        {
+          title: "02 — Modularize, then environment-ize",
+          body: "Built ten Terraform modules with zero environment logic inside them. Each environment supplies its own configuration — including CIDRs, sizing, database settings, and environment-specific variables.",
+        },
+        {
+          title: "03 — Chain security groups, not exceptions",
+          body: "ALB-SG → APP-SG → DB-SG. Only the ALB is internet-facing; the app and database tiers have no inbound path from the public internet.",
+        },
+      ],
+      decisions: [
+        {
+          title: "Separate state per environment",
+          why: "DEV, STAGE, and PROD each get their own directory and Terraform state instead of shared workspaces — the isolation is explicit, not implicit.",
+        },
+        {
+          title: "Modules that don't know the environment",
+          why: "No module contains a hardcoded CIDR, instance type, or environment name — the same `vpc` module builds DEV's `10.10.0.0/16` and PROD's `10.30.0.0/16`.",
+        },
+        {
+          title: "Private by default",
+          why: "App and database tiers have no public IP and no direct inbound path from the internet. Application instances use the NAT Gateway for outbound internet access, while the database tier has no internet route.",
+        },
+      ],
+      outcomes: [
+        "One module set drives three isolated environments with no duplicated infrastructure logic",
+        "Private application and database tiers enforce controlled network paths through layered Security Groups",
+        "CloudWatch provides baseline monitoring for ASG CPU, ALB 5XX errors, and RDS health",
+      ],
+      reflection:
+        "Terraform doesn't make infrastructure reusable by itself — the module has to be written so it doesn't care which environment is calling it.",
+    },
+  },
 // 
 //   /* ─────────────── 5 · BAAHUBALI (GitHub) ─────────────── */
 //   {

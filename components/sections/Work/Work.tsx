@@ -26,6 +26,10 @@ const pad = (n: number) => String(n).padStart(2, "0");
 export default function Work() {
   const root = useRef<HTMLElement>(null);
   const { t, lang } = useLang();
+  const orderedProjects = [
+    ...PROJECTS.filter((project) => project.slug === "terraform-aws-3tier-infrastructure"),
+    ...PROJECTS.filter((project) => project.slug !== "terraform-aws-3tier-infrastructure"),
+  ];
 
   useEffect(() => {
     const el = root.current;
@@ -118,7 +122,7 @@ export default function Work() {
 
       <div className={styles.stage}>
         <div className={styles.track}>
-          {PROJECTS.map((p, i) => (
+          {orderedProjects.map((p, i) => (
             <article className={styles.card} key={p.slug} style={{ zIndex: 100 - i }}>
               <a className={styles.inner} href={`/work/${p.slug}`}>
                 <div
@@ -192,9 +196,9 @@ export default function Work() {
       </div>
 
       <div className={styles.foot}>
-        <span className={styles.count}>01 / {pad(PROJECTS.length)}</span>
+        <span className={styles.count}>01 / {pad(orderedProjects.length)}</span>
         <div className={styles.dots}>
-          {PROJECTS.map((p, i) => (
+          {orderedProjects.map((p, i) => (
             <span key={p.slug} className={`${styles.dot} ${i === 0 ? styles.dotOn : ""}`} />
           ))}
         </div>

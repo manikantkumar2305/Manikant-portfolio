@@ -208,6 +208,7 @@
   padding: 18px 20px 20px;
 }
 .meta h3 {
+  white-space: pre-line;
   font-size: 16.5px;
   font-weight: 800;
   letter-spacing: -0.01em;
