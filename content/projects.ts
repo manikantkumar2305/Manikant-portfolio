@@ -200,11 +200,11 @@ export const PROJECTS: Project[] = [
   /* ─────────────── 3 · NOTESWAY CLOUD INFRASTRUCTURE ─────────────── */
   {
     slug: "notesway-cloud-infrastructure",
-    title: "NotesWay — Cloud Infrastructure for Academic Collaboration",
-    tags: ["Cloud Architecture", "AWS", "Docker", "ECS", "ECR", "GitHub Actions", "Security & DevOps"],
+    title: "NotesWay – Academic Notes Management Platform",
+    tags: ["Cloud Architecture", "AWS", "Docker", "EC2", "S3", "CloudFront", "Security & DevOps"],
     year: "2025",
     oneLiner:
-      "A production-oriented AWS architecture for an academic notes-sharing platform — containerized deployment, automated CI/CD, secure file storage, and infrastructure built to be operated, not just launched.",
+      "A production-oriented AWS architecture for an academic notes-sharing platform — containerized backend, secure cloud storage, load-balanced API, monitoring, and infrastructure designed to be operated, not just launched.",
     contribution:
       "Cloud & DevOps Engineer",
     coverLabel: "NOTESWAY",
@@ -213,46 +213,46 @@ export const PROJECTS: Project[] = [
     repo: "https://github.com/manikantkumar2305/notesway",
     study: {
       role: "Cloud & DevOps Engineer",
-      timeline: "2025 · Portfolio Project",
+      timeline: "2025",
       context:
-        "NotesWay is an academic notes-sharing platform for students, professors, and institutions — upload, share, and retrieve academic resources at the core. It's built on a 3-tier AWS architecture with a containerized FastAPI backend and a fully automated delivery pipeline from commit to production.",
+        "NotesWay is an academic notes-sharing platform for students, professors, and institutions to upload, share, organize, and retrieve academic resources. It runs on a 3-tier AWS architecture with a containerized FastAPI backend, a managed database, private file storage, and production-oriented security and monitoring.",
       problem:
-        "Getting the application running was never the hard part. The real challenge was building a deployment path that could ship updates reliably without touching a server by hand, keep compute and storage cleanly separated, and give the system enough visibility and access control to be trusted with real academic data — not just demoed once and left alone.",
+        "Running the application was easy. The real challenge was designing infrastructure that could separate frontend, backend, data, and file storage — while providing secure API access, reliable file delivery, monitoring, and a deployment setup that could scale beyond a single server.",
       process: [
         {
           title: "01 — Tier before service",
-          body: "Defined the presentation, application, and data layers before selecting a single AWS service. Frontend delivery, backend compute, database, and file storage are each independently managed and independently replaceable.",
+          body: "Split the platform into presentation, application, and data layers, so frontend delivery, backend compute, database, and file storage remain independently managed.",
         },
         {
-          title: "02 — Containerize, then automate",
-          body: "Packaged the FastAPI backend as a Docker image and moved deployment onto Amazon ECS, with Amazon ECR as the private image registry. GitHub Actions owns the path from `git push` to a running task — build, test, image push, deploy — with no manual step in between.",
+          title: "02 — Containerize the backend",
+          body: "Packaged the FastAPI backend with Docker and deployed it on Amazon EC2 behind an Application Load Balancer — making the backend reproducible and isolated from the frontend and storage layers.",
         },
         {
-          title: "03 — Secure by default, not by exception",
-          body: "Every request crosses WAF, TLS termination, and a load balancer before reaching compute. IAM roles are scoped per service rather than shared. Academic files never sit behind a public bucket — access is granted through short-lived S3 pre-signed URLs, upload and download alike.",
+          title: "03 — Secure by default",
+          body: "Protected API traffic with AWS WAF, HTTPS, and the Application Load Balancer. IAM, Security Groups, and Network ACLs layer access control, while academic files stay in S3, accessed only through time-limited pre-signed URLs.",
         },
       ],
       decisions: [
         {
-          title: "Containers over configured servers",
-          why: "The backend runs as a Docker container on ECS instead of a hand-tuned EC2 instance. A deployment is now an image tag, not a remembered sequence of manual steps — which means the environment that was tested is the exact environment that ships.",
+          title: "Containerized backend over a bare process",
+          why: "Docker gives the FastAPI backend a consistent runtime, making deployments easier to reproduce and maintain.",
         },
         {
-          title: "CI/CD as the only deployment path",
-          why: "GitHub Actions builds the image, runs tests, pushes to Amazon ECR, and triggers an ECS service update on every merge. There is no direct path to production that skips this pipeline — which makes every deployment auditable and every rollback a redeploy of a previous image tag, not a scramble.",
+          title: "Load balancer as the application entry point",
+          why: "The API is exposed through the Application Load Balancer rather than the backend process directly — a foundation for future horizontal scaling.",
         },
         {
           title: "Pre-signed URLs over public storage",
-          why: "Files live in private S3 storage. Every access — upload or download — goes through a scoped, time-limited pre-signed URL, so nothing academic is ever reachable by guessing a path.",
+          why: "Academic files stay in private S3 storage. Upload and download access is granted through scoped, time-limited pre-signed URLs instead of a public bucket.",
         },
       ],
       outcomes: [
-        "A manually deployed student project became a containerized AWS deployment on ECS and ECR, shipped through a GitHub Actions CI/CD pipeline",
-        "Frontend, backend, database, and file storage fully decoupled across a 3-tier architecture — each layer scales, fails, or gets replaced on its own",
-        "Deployment moved from \"someone SSHs in and runs a script\" to \"merge to main, and the pipeline handles the rest\"",
+        "✦ A single-server application evolved into a structured, containerized AWS 3-tier deployment with separated frontend, application, database, and storage layers",
+        "✦ API traffic is protected through WAF, HTTPS, and an Application Load Balancer, with CloudWatch providing centralized monitoring and logging",
+        "✦ File storage is decoupled from compute through private S3 and pre-signed URLs, reducing backend load for large file transfers",
       ],
       reflection:
-        "Good cloud infrastructure isn't about stacking on more services — it's about building a secure, repeatable path from code to production that you'd trust someone else to run at 2 a.m.",
+        "The real value of cloud engineering isn't building something that works once — it's building something that keeps working, and keeps proving it.",
     },
   },
 
