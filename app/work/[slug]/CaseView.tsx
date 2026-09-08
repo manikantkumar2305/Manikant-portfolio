@@ -11,7 +11,6 @@
 import Link from "next/link";
 import { useState } from "react";
 import { PROJECTS } from "@/content/projects";
-import LanguageToggle from "@/components/layout/LanguageToggle";
 import { useLang, L } from "@/lib/i18n";
 import styles from "./case.module.css";
 
@@ -38,13 +37,10 @@ export default function CaseView({ slug }: { slug: string }) {
         <Link href="/#work" className={styles.back}>
           {t("case.back")}
         </Link>
-        {/* the toggle is repeated here because Nav only exists on the home
-            page — a shared case-study link is often a visitor's first screen */}
         <div className={styles.barRight}>
           <Link href="/" className={styles.logo}>
-            GIREESH<i>.</i>
+            MANIKANT<i>.</i>
           </Link>
-          <LanguageToggle />
         </div>
       </div>
 
