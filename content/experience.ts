@@ -36,42 +36,41 @@ export type Role = {
 
 export const ROLES: Role[] = [
   {
-    company: "Heeding Climate Solutions",
-    role: "Product Designer & UX Consultant",
+    company: "Laventra Technologies LLP",
+    role: "SRE / DevOps Intern",
     type: "Internship",
-    location: "Sophia Antipolis, France",
-    period: "May – Oct 2026",
+    location: "Hyderabad, India",
+    period: "Oct 2026 – Present",
     summary:
-      "Owning the UX of a sustainable-fuel marketplace — research to hi-fi production mock-ups, every screen tied to a conversion KPI.",
+      "Supporting deployment and reliability of RenderReply, an Instagram automation SaaS on AWS Elastic Beanstalk, with GitHub Actions CI/CD and CloudWatch monitoring.",
     achievements: [
-      "Ran stakeholder interviews & segmentation workshops; shipped persona-specific Figma prototypes for fleet operators, suppliers and public-sector buyers",
-      "Partnered with the Product Owner on roadmap, backlog and design-system governance",
-      "Instrumented acquisition→activation→retention funnels (GA4); weekly insights fed the design backlog",
+      "Supported deployment and reliability of an AWS Elastic Beanstalk application for RenderReply",
+      "Worked with GitHub Actions CI/CD to streamline release and environment automation",
+      "Monitored application health and operational signals using Amazon CloudWatch",
     ],
-    outcome: "Product targeting 1B+ tonnes of avoided CO₂ by 2050",
-    skills: ["Figma", "UX Research", "Design Systems", "GA4", "Agile"],
+    outcome: "Automated deployments across all environments through GitHub Actions CI/CD",
+    skills: ["AWS Elastic Beanstalk", "GitHub Actions", "Amazon CloudWatch", "CI/CD", "Amazon Web Services (AWS)"],
     color: "#0072E3",
     fg: "light",
-    /* transparent two-tone blue lockup, 1199×330 — needs a light ground.
-       Composition has room, so it stays on the right. */
     logo: {
-      src: "/images/companies/heeding.png",
+      src: "/images/companies/Laventra.png",
       variant: "plate",
-      aspect: 1199 / 330,
+      aspect: 1,
       placement: "right",
     },
     fr: {
-      role: "Product Designer & consultant UX",
+      role: "Stagiaire SRE / DevOps",
       summary:
-        "Responsable de l’UX d’une marketplace de carburants durables — de la recherche aux maquettes de production, chaque écran lié à un KPI de conversion.",
-      outcome: "Produit visant 1 Md+ de tonnes de CO₂ évitées d’ici 2050",
+        "Support du déploiement et de la fiabilité de RenderReply, un SaaS d’automatisation Instagram sur AWS Elastic Beanstalk, avec CI/CD GitHub Actions et monitoring CloudWatch.",
+      outcome: "Déploiements automatisés sur tous les environnements via GitHub Actions CI/CD",
       achievements: [
-        "Entretiens avec les parties prenantes et ateliers de segmentation ; prototypes Figma dédiés aux transporteurs, fournisseurs et acheteurs publics",
-        "Collaboration avec le Product Owner sur la roadmap, le backlog et la gouvernance du design system",
-        "Instrumentation des tunnels acquisition→activation→rétention (GA4) ; insights hebdomadaires nourrissant le backlog design",
+        "Support du déploiement et de la fiabilité d’une application AWS Elastic Beanstalk pour RenderReply",
+        "Travail avec GitHub Actions CI/CD pour fluidifier les releases et l’automatisation des environnements",
+        "Surveillance de la santé applicative et des signaux opérationnels avec Amazon CloudWatch",
       ],
     },
   },
+  /*
   {
     company: "UNBIAS Innovation Hackathon",
     role: "Product & AI Innovation Lead",
@@ -89,9 +88,6 @@ export const ROLES: Role[] = [
     skills: ["Product Strategy", "Prototyping", "UX/UI", "AI", "HTML/CSS"],
     color: "#6D3BF5",
     fg: "light",
-    /* transparent violet wordmark, 685×226 — needs a light ground.
-       This panel's copy is dense, so the mark closes the panel underneath
-       the content instead of competing with it on the right. */
     logo: {
       src: "/images/companies/unbias.png",
       variant: "plate",
@@ -126,7 +122,6 @@ export const ROLES: Role[] = [
     skills: ["Process Mapping", "Dashboard Design", "KPI Design", "Stakeholders"],
     color: "#FFFFFF",
     fg: "dark",
-    /* gold chevron on its own black ground, 200×200 */
     logo: { src: "/images/companies/vraise.jpg", variant: "tile", aspect: 1 },
     fr: {
       role: "Analyste métier & processus",
@@ -155,7 +150,6 @@ export const ROLES: Role[] = [
     skills: ["Responsible AI", "Data Validation", "UX Writing"],
     color: "#FF2E0F",
     fg: "light",
-    /* blue ring mark on its own blue ground, 100×100 */
     logo: { src: "/images/companies/oigetit.jpg", variant: "tile", aspect: 1 },
     fr: {
       role: "Analyste IA « human-in-the-loop »",
@@ -211,7 +205,6 @@ export const ROLES: Role[] = [
     skills: ["Strategy", "Segmentation", "Pipeline", "Leadership"],
     color: "#FFB200",
     fg: "dark",
-    /* blue wordmark on its own lavender ground, 100×100 */
     logo: { src: "/images/companies/sage.jpg", variant: "tile", aspect: 1 },
     fr: {
       role: "Responsable opérations & développement commercial",
@@ -240,7 +233,6 @@ export const ROLES: Role[] = [
     skills: ["Go-to-Market", "Growth", "Retention"],
     color: "#171429",
     fg: "light",
-    /* navy wordmark on its own white ground, 100×100 */
     logo: { src: "/images/companies/tutorac.jpg", variant: "tile", aspect: 1 },
     fr: {
       role: "Chargé de développement commercial",
@@ -253,4 +245,5 @@ export const ROLES: Role[] = [
       ],
     },
   },
+  */
 ];
